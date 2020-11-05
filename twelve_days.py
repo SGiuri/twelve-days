@@ -2,21 +2,19 @@ import re
 
 
 def recite(start_verse, end_verse):
-    verse_12 = """
-    On the twelfth day of Christmas my true love gave to me: 
-    twelve Drummers Drumming, 
-    eleven Pipers Piping, 
-    ten Lords-a-Leaping, 
-    nine Ladies Dancing, 
-    eight Maids-a-Milking, 
-    seven Swans-a-Swimming, 
-    six Geese-a-Laying, 
-    five Gold Rings, 
-    four Calling Birds, 
-    three French Hens, 
-    two Turtle Doves, 
-    and a Partridge in a Pear Tree.
-    """
+
+    presents = ['a Partridge in a Pear Tree.',
+                'two Turtle Doves, ',
+                'three French Hens, ',
+                'four Calling Birds, ',
+                'five Gold Rings, ',
+                'six Geese-a-Laying, ',
+                'seven Swans-a-Swimming, ',
+                'eight Maids-a-Milking, ',
+                'nine Ladies Dancing, ',
+                'ten Lords-a-Leaping, ',
+                'eleven Pipers Piping, ',
+                'twelve Drummers Drumming, ']
 
     days = ["first",
             "second",
@@ -34,25 +32,15 @@ def recite(start_verse, end_verse):
     the_song = []
 
     # splitting the twelfth verse
-    verse_parts = [verse.lstrip() for verse in verse_12.strip().split("\n")]
-    intro_verse = verse_parts.pop(0)
 
-    # building each verse
-    for day in range(start_verse, end_verse + 1):
+    for verse_number in range(start_verse-1,end_verse):
 
-        days_intro = re.sub(r"twelfth", days[day - 1], intro_verse)
+        verse = f"On the {days[verse_number]} day of Christmas my true love gave to me: "
+        for numbers_of_presents in range(verse_number,-1,-1):
 
-        if day == 1:
-            requested_verse = days_intro + list_to_str(verse_parts[11][4:])
-        else:
-            requested_verse = days_intro + list_to_str(verse_parts[12 - day:])
-        the_song.append(requested_verse)
+            verse += presents[numbers_of_presents]
+            if numbers_of_presents == 1:
+                verse += "and "
+        the_song.append(verse)
 
     return the_song
-
-
-def list_to_str(list_of_string):
-    final_stirng = ""
-    for j in range(len(list_of_string)):
-        final_stirng += list_of_string[j]
-    return final_stirng

@@ -1,5 +1,4 @@
 def recite(start_verse, end_verse):
-
     presents = ['a Partridge in a Pear Tree.',
                 'two Turtle Doves',
                 'three French Hens',
@@ -30,14 +29,17 @@ def recite(start_verse, end_verse):
 
     # splitting the twelfth verse
 
-    for verse_number in range(start_verse-1, end_verse):
+    for verse_number in range(start_verse - 1, end_verse):
 
-        verse = f"On the {days[verse_number]} day of Christmas my true love gave to me: "
-        for numbers_of_presents in range(verse_number, -1, -1):
+        first_part_verse = f"On the {days[verse_number]} day of Christmas my true love gave to me: "
+        second_part_verse = ", ".join(presents[verse_number:0:-1])
+        # print(second_part_verse)
 
-            verse += presents[numbers_of_presents]
-            if numbers_of_presents == 1:
-                verse += "and "
+        if verse_number > 0:
+            verse = first_part_verse + second_part_verse + ", and " + presents[0]
+        else:
+            verse = first_part_verse + presents[0]
+
         the_song.append(verse)
 
     return the_song
